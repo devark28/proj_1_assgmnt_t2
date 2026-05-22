@@ -9,6 +9,7 @@
 typedef struct Record {
     char firstName[MAX_NAME];
     int grade;
+    // linked list of the next tied record sharing this last name
     struct Record* next;
 } Record;
 
@@ -170,7 +171,6 @@ int main(void) {
         printf("2) Print all records (in-order)\n");
         printf("3) Quit\n");
         printf("Choose: ");
-        fflush(stdout);
 
         char buf[MAX_LINE];
         if (!readLine(buf, sizeof(buf))) break;
@@ -180,7 +180,6 @@ int main(void) {
         switch (choice) {
             case 1: {
                 printf("Enter last name: ");
-                fflush(stdout);
                 if (!readLine(buf, sizeof(buf))) { running = 0; break; }
                 char* key = trim(buf);
                 if (*key == '\0') { printf("Empty input.\n"); break; }
