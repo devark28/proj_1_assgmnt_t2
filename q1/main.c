@@ -28,15 +28,16 @@ void swapStudents(Student* a, Student* b) {
 // Lomuto partition with the last element as pivot.
 int partition(Student arr[], int low, int high) {
     Student pivot = arr[high];
-    int i = low - 1;
+    int storeIndex = low - 1;
     for (int j = low; j < high; j++) {
         if (compareStudents(&arr[j], &pivot) <= 0) {
-            i++;
-            swapStudents(&arr[i], &arr[j]);
+            storeIndex++;
+            swapStudents(&arr[storeIndex], &arr[j]);
         }
     }
-    swapStudents(&arr[i + 1], &arr[high]);
-    return i + 1;
+    storeIndex++;
+    swapStudents(&arr[storeIndex], &arr[high]);
+    return storeIndex;
 }
 
 void quickSort(Student arr[], int low, int high) {
