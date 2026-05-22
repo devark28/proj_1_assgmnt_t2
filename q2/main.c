@@ -53,7 +53,6 @@ void traverseForward(Route* r) {
     printf("\n--- Forward (home -> campus) ---\n");
     for (Stop* c = r->head; c != NULL; c = c->next) {
         printf("Stop %d: %s\n", c->number, c->name);
-        fflush(stdout);
         if (c->next != NULL) sleep(3);
     }
     printf("Arrived at campus.\n");
@@ -67,7 +66,6 @@ void traverseBackward(Route* r) {
     printf("\n--- Backward (campus -> home) ---\n");
     for (Stop* c = r->tail; c != NULL; c = c->prev) {
         printf("Stop %d: %s\n", c->number, c->name);
-        fflush(stdout);
         if (c->prev != NULL) sleep(3);
     }
     printf("Arrived at home.\n");
@@ -106,7 +104,6 @@ int readInt(const char* prompt, int* out) {
     char buf[LINE_BUF];
     for (;;) {
         printf("%s", prompt);
-        fflush(stdout);
         if (!readLine(buf, sizeof(buf))) return 0;
         if (sscanf(buf, "%d", out) == 1) return 1;
         printf("Please enter a valid integer.\n");
@@ -117,12 +114,12 @@ void promptAddStop(Route* r) {
     char name[MAX_NAME];
     int num;
     printf("Enter stop name: ");
-    fflush(stdout);
-    if (!readLine(name, sizeof(name)) || name[0] == '\0') {
+    readLine(name, sizeof(name));
+    if (name[0] == '\0') {
         printf("Empty name; cancelled.\n");
         return;
     }
-    if (!readInt("Enter stop number: ", &num)) return;
+    readInt("Enter stop number: ", &num);
     appendStop(r, name, num);
     printf("Added stop %d (%s) at end of route.\n", num, name);
 }
@@ -130,25 +127,21 @@ void promptAddStop(Route* r) {
 int main(void) {
     Route route = { NULL, NULL };
     int initialCount = 0;
-
-    if (!readInt("How many initial bus stops? ", &initialCount)) return 0;
+    readInt("How many initial bus stops? ", &initialCount);
     if (initialCount < 0) initialCount = 0;
 
     for (int i = 0; i < initialCount; i++) {
         char name[MAX_NAME];
-        int num;
+        int num = 0;
         printf("\nStop %d of %d\n", i + 1, initialCount);
         printf("  Name: ");
-        fflush(stdout);
-        if (!readLine(name, sizeof(name)) || name[0] == '\0') {
+        readLine(name, sizeof(name));
+        if (name[0] == '\0') {
             printf("  Empty name; please try again.\n");
             i--;
             continue;
         }
-        if (!readInt("  Number: ", &num)) {
-            freeRoute(&route);
-            return 0;
-        }
+        readInt("  Number: ", &num);
         appendStop(&route, name, num);
     }
 
@@ -159,8 +152,8 @@ int main(void) {
         printf("3) Add a new stop at the end\n");
         printf("4) Show the route\n");
         printf("5) Quit\n");
-        int choice;
-        if (!readInt("Choose: ", &choice)) break;
+        int choice = 0;
+        readInt("Choose: ", &choice);
         switch (choice) {
             case 1: traverseForward(&route); break;
             case 2: traverseBackward(&route); break;
