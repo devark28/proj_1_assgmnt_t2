@@ -1,0 +1,15 @@
+Alice| Mukamana| 78
+Brian| Niyonzima| 65
+Chantal| Uwase| 92
+David| Mukamana| 88
+Eric| Habimana| 54
+Faith| Ingabire| 88
+George| Bizimana| 65
+Hope| Mukamuhirwa| 78
+Ivan| Nshimiyimana| 100
+Jasmine| Akimana| 0
+Kevin| Ndayisenga| 73
+Linda| Umutoni| 92
+Marc| Tuyishime| 47
+Noella| Kayitesi| 88
+Olivier| Mukamana| 65
