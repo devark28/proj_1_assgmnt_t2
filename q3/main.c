@@ -169,7 +169,6 @@ int readInt(const char* prompt, int* out) {
     char buf[LINE_BUF];
     for (;;) {
         printf("%s", prompt);
-        fflush(stdout);
         if (!readLine(buf, sizeof(buf))) return 0;
         if (sscanf(buf, "%d", out) == 1) return 1;
         printf("Please enter a valid integer.\n");
